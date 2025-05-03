@@ -1,5 +1,5 @@
+"use client";
 import { addIncome } from "@/lib/actions/finData.actions";
-import { addSpending } from "@/lib/actions/finData.actions";
 import { periodTypes } from "@/app/constants";
 import { useState } from "react";
 export default function AddIncomeForm() {
@@ -10,12 +10,15 @@ export default function AddIncomeForm() {
     // update db with spending data
   };
   const [form, setForm] = useState({
-    name: "",
+    incomeName: "",
     amount: "",
+    received: true,
     recurring: false,
     period: "",
+    payType:"",
+    recurringStart:"",
+    recurringEnd:"",
     type: "",
-    wantLevel: "",
   });
 
   const handleChange = (e) => {
@@ -30,12 +33,13 @@ export default function AddIncomeForm() {
     e.preventDefault();
 
     const payload = {
-      name: form.name,
+      incomeName: form.incomeName,
       amount: parseFloat(form.amount),
       recurring: form.recurring,
       period: parseInt(form.period),
+      recurringStart:form.recurringStart,
+      recurringEnd:form.recurringEnd,
       type: form.type,
-      wantLevel: parseInt(form.wantLevel),
       updated: new Date().toISOString(),
     };
     console.log("Submitted data:", payload);
@@ -48,19 +52,19 @@ export default function AddIncomeForm() {
         <h2 className="form-title">Add Income Sources</h2>
 
         <div className="form-set">
-          <label>Name</label>
+          <label>Income Name</label>
           <input
             // id="name"
             type="text"
-            name="name"
-            value={form.name}
+            name="incomeName"
+            value={form.incomeName}
             onChange={handleChange}
             className="adv-input"
           />
         </div>
 
         <div className="form-set">
-          <label>Amount</label>
+          <label>Income Amount</label>
           <input
             type="number"
             name="amount"
@@ -69,6 +73,17 @@ export default function AddIncomeForm() {
             className="adv-input"
           />
         </div>
+
+      <div className="form-set">
+        <label>Received</label>
+        <input
+          type="checkbox"
+          name="received"
+          checked={form.received}
+          onChange={handleChange}
+          className="adv-checkbox"
+        />
+      </div>
 
         <div className="form-set">
           <label>Recurring</label>
@@ -80,7 +95,7 @@ export default function AddIncomeForm() {
             className="adv-checkbox"
           />
         </div>
-        {form.recurring&&
+        {form.recurring&&<>
         <div className="form-set">
           <label>Period</label>
           <select
@@ -96,7 +111,30 @@ export default function AddIncomeForm() {
               </option>
             ))}
           </select>
-        </div>}
+        </div>
+
+        <div className="form-set">
+          <label>Date Start</label>
+          <input
+            type="date"
+            name="recurring"
+            checked={form.recurringStart}
+            onChange={handleChange}
+            className="adv-checkbox"
+          />
+        </div>
+        <div className="form-set">
+          <label>Date End</label>
+          <input
+            type="date"
+            name="recurring"
+            checked={form.recurringEnd}
+            onChange={handleChange}
+            className="adv-checkbox"
+          />
+        </div>
+        </>
+        }
 
         <div className="form-set">
           <label>Type</label>
@@ -128,7 +166,7 @@ export default function AddIncomeForm() {
             clear
           </button>
           <button type="submit" className="submit-button">
-            Submit
+            Add Income
           </button>
         </div>
       </form>

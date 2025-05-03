@@ -35,18 +35,28 @@ const finDataSchema = new Schema({
     type: Object,
     required: false,
   },
-  income: {
-    payType: String,
-    amount: Number,
-  },
-  spending: [
+  income: [
     {
-      name: String,
+      incomeName: String,
       amount: Number,
       recurring: Boolean,
       period: Number,
-      type: String,
+      recurringStart: Date,
+      recurringEnd: Date,
+      received:Boolean,
+      updated_at: Date,
+    },
+  ],
+  spending: [
+    {
+      spendingName: String,
+      amount: Number,
+      recurring: Boolean,
+      period: Number,
+      spendingType: String,
       wantLevel: Number,
+      recurringStart: Date,
+      recurringEnd: Date,
       updated_at: Date,
     },
   ],

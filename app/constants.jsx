@@ -6,6 +6,14 @@ export const periodTypes = [
   { label: "Monthly", value: 30 },
   { label: "yearly", value: 365 },
 ];
+export const IncomePeriodTypes = [
+  { label: "One Time", value: periodDefault },
+  { label: "hourly", value: 1 },
+  { label: "Weekly", value: 7 },
+  { label: "Biweekly", value: 14 },
+  { label: "Monthly", value: 30 },
+  { label: "yearly", value: 365 },
+];
 
 export const spendingTypeDefault = "one time purchase";
 export const spendingType = [

@@ -1,5 +1,5 @@
 import AddSpendingForm from "./AddSpendingForm";
-
+import AddIncomeForm from "./AddIncomeForm";
 // goal is to grow saving
 //   put it into growth savings account
 //   invest
@@ -21,6 +21,7 @@ export default function advicePage() {
   // get fin data if stored
   // update db data upon unmount with saved fin data
   // })
+
   const updateSpendingData = () => {
     // update statedata
   };
@@ -28,10 +29,13 @@ export default function advicePage() {
   const saveSpendingData = () => {
     // update db with spending data
   };
+
   const deleteSpendingData = () => {};
+
   return (
     <div className="surveypage">
         <AddSpendingForm/>
+        <AddIncomeForm/>
       
       {/* display pie chart if data */}
       {/* display what they can save on */}
