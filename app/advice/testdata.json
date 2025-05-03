@@ -1,0 +1,33 @@
+{
+  "salary": 15000,
+  "wage": 15,
+  "hourly": true,
+  "salaried": false,
+  "weeklyHours": 40,
+  "rent": 600,
+  "payperiod": 3,
+  "payperiod_": "number of days options [1:daily, 7:weekly, 14:biweekly, ] ",
+  "pay": [
+    {
+      "type": "job",
+      "type_": ["job", "contract", "sidehustle"],
+      "amount": 1500,
+      "date": "date received",
+      "updated": "date_added in app"
+    }
+  ],
+  "itemized": [
+    {
+      "name": "rent",
+      "amount": 1500,
+      "recurring": true,
+      "period": 30,
+      "period_": "does this charge repeat?",
+      "type": "rent",
+      "type_": ["rent", "bill", "food", "", "custom"],
+      "wantLevel": 0,
+      "wantLevel_": "0 is a need others are different levels of importance",
+      "updated": "date_added in app"
+    }
+  ]
+}
