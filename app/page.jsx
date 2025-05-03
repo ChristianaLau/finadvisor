@@ -1,15 +1,16 @@
-'use client'; 
+'use client';
 
 import { ClerkProvider, SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import Image from "next/image";
-import { VictoryLine, VictoryChart, VictoryAxis, VictoryBar, VictoryTheme} from 'victory';
+import { VictoryLine, VictoryChart, VictoryAxis, VictoryBar, VictoryTheme } from 'victory';
+import { motion } from "framer-motion";
+
 const financialData = [
   { quarter: 'Q1', earnings: 18500, expenses: 12200, profit: 6300 },
   { quarter: 'Q2', earnings: 22400, expenses: 15800, profit: 6600 },
   { quarter: 'Q3', earnings: 19800, expenses: 14500, profit: 5300 },
   { quarter: 'Q4', earnings: 26500, expenses: 18200, profit: 8300 }
 ];
-
 
 const Page = () => {
   return (
@@ -22,18 +23,23 @@ const Page = () => {
         quality={100}
         priority
       />
-      
+
       <div className="absolute top-0 left-0 p-4">
         <Image
           src="/logo.png"
           alt="Logo"
-          width={300} 
-          height={150} 
+          width={300}
+          height={150}
           className="object-contain"
         />
       </div>
 
-      <div className="absolute top-150 left-52 p-4 flex gap-20">
+      <motion.div
+        className="absolute top-150 left-52 p-4 flex gap-20"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.5 }}
+      >
         <SignedOut>
           <SignInButton>
             <button className="bg-white text-black px-12 py-4 rounded-lg font-medium hover:bg-gray-100 transition text-xl shadow-md">
@@ -47,191 +53,172 @@ const Page = () => {
           </SignUpButton>
         </SignedOut>
         <SignedIn>
-        <UserButton afterSignOutUrl="/" />
+          <UserButton afterSignOutUrl="/" />
         </SignedIn>
-      </div>
+      </motion.div>
 
-      <div className="absolute top-50 right-50 p-4">
+      <motion.div
+        className="absolute top-50 right-50 p-4"
+        initial={{ opacity: 0, x: 100 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1 }}
+      >
         <Image
           src="/woman_phone.png"
           alt="woman"
-          width={400} 
-          height={850} 
+          width={400}
+          height={850}
           className="object-contain"
         />
-      </div>
-      <div className="relative z-10 top-60 left-30 container mx-auto px-4 py-20 text-left">
+      </motion.div>
+
+      <motion.div
+        className="relative z-10 top-60 left-30 container mx-auto px-4 py-20 text-left"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.3 }}
+      >
         <h1 className="text-8xl font-bold text-white mb-6">Plan Smarter,</h1>
         <h2 className="text-8xl font-bold text-white mb-6">Live Better.</h2>
-      </div>
-   {/* Text Section */}
+      </motion.div>
+
       <div className="relative z-10 top-200 left-0 container mx-auto px-4 py-20 text-left">
         <h1 className="text-8xl font-bold text-black mb-6">Revolutionize Your Spending</h1>
         <p className="text-5xl font-bold text-black mb-6">Today.</p>
-        <ul className="text-3xl relative top-20 space-y-4"><li>See exactly how much you make</li>
-
-        <li>Know where every dollar goes</li>
-        <li>Auto-calculate taxes with W-2 or manual input</li>
-        <li>Categorize and break down expenses</li>
-        <li>Instantly know how much you’re saving</li>
-</ul>
+        <ul className="text-3xl relative top-20 space-y-4">
+          <li>See exactly how much you make</li>
+          <li>Know where every dollar goes</li>
+          <li>Auto-calculate taxes with W-2 or manual input</li>
+          <li>Categorize and break down expenses</li>
+          <li>Instantly know how much you’re saving</li>
+        </ul>
       </div>
-
 
       <div className="absolute z-10 top-530 left-20 container mx-auto px-4 py-20 text-left">
         <h1 className="text-8xl font-bold text-black mb-6"> Smarter Choices, Bigger Savings</h1>
         <p className="text-5xl font-bold text-black mb-6">Today.</p>
-        <ul className="text-3xl relative top-20 space-y-4">  <li>Set goals and track your progress</li>
-  <li>Get tips based on your goals</li>
-  <li>Spot habits that hurt your savings</li>
-  <li>Understand where your money goes</li>
-  <li>Separate needs from wants</li>
-</ul>
+        <ul className="text-3xl relative top-20 space-y-4">
+          <li>Set goals and track your progress</li>
+          <li>Get tips based on your goals</li>
+          <li>Spot habits that hurt your savings</li>
+          <li>Understand where your money goes</li>
+          <li>Separate needs from wants</li>
+        </ul>
       </div>
 
-   {/* Graphs Section */}
       <div className="absolute top-380 right-50 p-4 w-[650px] h-[350px] bg-white rounded-lg shadow-xl">
-  <VictoryChart
-    domainPadding={20}
-    padding={{ top: 40, bottom: 60, left: 60, right: 40 }}
-  >
-    <VictoryAxis
-      tickValues={[1, 2, 3, 4, 5]}
-      tickFormat={["Jan", "Feb", "Mar", "Apr", "May"]}
-      style={{
-        tickLabels: { fontSize: 12, padding: 10 },
-        axis: { stroke: "#cbd5e0" }
-      }}
-    />
-    <VictoryAxis
-      dependentAxis
-      tickFormat={(x) => `$${x / 1000}k`}
-      style={{
-        tickLabels: { fontSize: 12, padding: 10 },
-        axis: { stroke: "#cbd5e0" }
-      }}
-    />
-    <VictoryLine
-      data={[
-        { x: 1, y: 4000 },
-        { x: 2, y: 7200 },
-        { x: 3, y: 3800 },
-        { x: 4, y: 8900 },
-        { x: 5, y: 9500 },
-      ]}
-      style={{
-        data: { stroke: "#8b5cf6", strokeWidth: 3 },
-        parent: { border: "1px solid #ccc" }
-      }}
-    />
-  </VictoryChart>
-</div>
-<div className="absolute top-600 right-70 p-6 w-[500px] bg-white rounded-lg shadow-xl flex flex-col">
-      <VictoryChart
-        theme={VictoryTheme.material}
-        domainPadding={{ x: 30 }}
-      >
-        <VictoryAxis
-          tickFormat={["Q1", "Q2", "Q3", "Q4"]}
-          style={{
-            tickLabels: { fontSize: 12, padding: 5, fill: "#4b5563" },
-            axis: { stroke: "#e5e7eb" }
-          }}
-        />
-        <VictoryAxis
-          dependentAxis
-          tickFormat={(x) => `$${x / 1000}k`}
-          style={{
-            tickLabels: { fontSize: 12, fill: "#4b5563" },
-            axis: { stroke: "#e5e7eb" },
-            grid: { stroke:"#f3f4f6" }
-          }}
-        />
-        <VictoryBar
-          data={financialData}
-          x="quarter"
-          y="earnings"
-          style={{
-            data: { fill: "#8b5cf6", width: 20 } 
-          }}
-          cornerRadius={{top: 5 }}
-        />
-        <VictoryBar
-          data={financialData}
-          x="quarter"
-          y="expenses"
-          style={{
-            data: { fill: "#ef4444", width: 20 } 
-          }}
-          cornerRadius={{ top: 5 }}
-        />
-        <VictoryBar
-          data={financialData}
-          x="quarter"
-          y="profit"
-          style={{
-            data: { fill: "#10b981", width: 20 } 
-          }}
-          cornerRadius={{ top: 5 }}
-        />
-      </VictoryChart>
-      
-      {/* Legend */}
-      <div className="flex justify-center mt-4 space-x-6">
-        <div className="flex items-center">
-          <div className="w-4 h-4 bg-[#8b5cf6] mr-2 rounded-sm"></div>
-          <span className="text-sm">Earnings</span>
-        </div>
-        <div className="flex items-center">
-          <div className="w-4 h-4 bg-[#ef4444] mr-2 rounded-sm"></div>
-          <span className="text-sm">Expenses</span>
-        </div>
-        <div className="flex items-center">
-          <div className="w-4 h-4 bg-[#10b981] mr-2 rounded-sm"></div>
-          <span className="text-sm">Profit</span>
-        </div>
+        <VictoryChart domainPadding={20} padding={{ top: 40, bottom: 60, left: 60, right: 40 }}>
+          <VictoryAxis
+            tickValues={[1, 2, 3, 4, 5]}
+            tickFormat={["Jan", "Feb", "Mar", "Apr", "May"]}
+            style={{
+              tickLabels: { fontSize: 12, padding: 10 },
+              axis: { stroke: "#cbd5e0" }
+            }}
+          />
+          <VictoryAxis
+            dependentAxis
+            tickFormat={(x) => `$${x / 1000}k`}
+            style={{
+              tickLabels: { fontSize: 12, padding: 10 },
+              axis: { stroke: "#cbd5e0" }
+            }}
+          />
+          <VictoryLine
+            data={[
+              { x: 1, y: 4000 },
+              { x: 2, y: 7200 },
+              { x: 3, y: 3800 },
+              { x: 4, y: 8900 },
+              { x: 5, y: 9500 },
+            ]}
+            style={{
+              data: { stroke: "#8b5cf6", strokeWidth: 3 },
+              parent: { border: "1px solid #ccc" }
+            }}
+          />
+        </VictoryChart>
       </div>
-    </div>
-    <div className="absolute z-10 top-800 left-0 right-0 text-center px-4 py-20">
-      <h1 className="text-8xl font-bold text-black mb-6">Us, Our Mission</h1>
-      
-      {/* Cards container */}
-      <div className="flex justify-center gap-20 mt-30">
-        <div className="w-[300px] bg-white rounded-xl shadow-md overflow-hidden">
-          <img src="/woman_phone.png" alt="Woman on phone" className="w-full h-48 object-cover" />
-          <div className="p-4">
-            <h3 className="text-lg font-semibold mb-2">Christiana</h3>
-            <p className="text-gray-600">Placeholder Text</p>
-          </div>
-        </div>
 
-        {/* Card 2 */}
-        <div className="w-[300px] bg-white rounded-xl shadow-md overflow-hidden">
-          <img src="/woman_phone.png" alt="Woman on phone" className="w-full h-48 object-cover" />
-          <div className="p-4">
-            <h3 className="text-lg font-semibold mb-2">Kyaw</h3>
-            <p className="text-gray-600">Placeholder Text</p>
-          </div>
-        </div>
+      <div className="absolute top-600 right-70 p-6 w-[500px] bg-white rounded-lg shadow-xl flex flex-col">
+        <VictoryChart theme={VictoryTheme.material} domainPadding={{ x: 30 }}>
+          <VictoryAxis
+            tickFormat={["Q1", "Q2", "Q3", "Q4"]}
+            style={{
+              tickLabels: { fontSize: 12, padding: 5, fill: "#4b5563" },
+              axis: { stroke: "#e5e7eb" }
+            }}
+          />
+          <VictoryAxis
+            dependentAxis
+            tickFormat={(x) => `$${x / 1000}k`}
+            style={{
+              tickLabels: { fontSize: 12, fill: "#4b5563" },
+              axis: { stroke: "#e5e7eb" },
+              grid: { stroke: "#f3f4f6" }
+            }}
+          />
+          <VictoryBar
+            data={financialData}
+            x="quarter"
+            y="earnings"
+            style={{ data: { fill: "#8b5cf6", width: 20 } }}
+            cornerRadius={{ top: 5 }}
+          />
+          <VictoryBar
+            data={financialData}
+            x="quarter"
+            y="expenses"
+            style={{ data: { fill: "#ef4444", width: 20 } }}
+            cornerRadius={{ top: 5 }}
+          />
+          <VictoryBar
+            data={financialData}
+            x="quarter"
+            y="profit"
+            style={{ data: { fill: "#10b981", width: 20 } }}
+            cornerRadius={{ top: 5 }}
+          />
+        </VictoryChart>
 
-        {/* Card 3 */}
-        <div className="w-[300px] bg-white rounded-xl shadow-md overflow-hidden">
-          <img src="/woman_phone.png" alt="Woman on phone" className="w-full h-48 object-cover" />
-          <div className="p-4">
-            <h3 className="text-lg font-semibold mb-2">Cody</h3>
-            <p className="text-gray-600">Placeholder Text</p>
+        <div className="flex justify-center mt-4 space-x-6">
+          <div className="flex items-center">
+            <div className="w-4 h-4 bg-[#8b5cf6] mr-2 rounded-sm"></div>
+            <span className="text-sm">Earnings</span>
+          </div>
+          <div className="flex items-center">
+            <div className="w-4 h-4 bg-[#ef4444] mr-2 rounded-sm"></div>
+            <span className="text-sm">Expenses</span>
+          </div>
+          <div className="flex items-center">
+            <div className="w-4 h-4 bg-[#10b981] mr-2 rounded-sm"></div>
+            <span className="text-sm">Profit</span>
           </div>
         </div>
       </div>
+
+      <div className="absolute z-10 top-800 left-0 right-0 text-center px-4 py-20">
+        <h1 className="text-8xl font-bold text-black mb-6">Us, Our Mission</h1>
+        <div className="flex justify-center gap-20 mt-30">
+          {["Christiana", "Kyaw", "Cody"].map((name) => (
+            <div key={name} className="w-[300px] bg-white rounded-xl shadow-md overflow-hidden">
+              <img src="/woman_phone.png" alt="Woman on phone" className="w-full h-48 object-cover" />
+              <div className="p-4">
+                <h3 className="text-lg font-semibold mb-2">{name}</h3>
+                <p className="text-gray-600">Placeholder Text</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="absolute w-full bg-gray-200 py-6 px-4 top-1000 text-center">
+        <h3 className="text-2xl font-semibold text-gray-800 mb-2">Contact Us</h3>
+        <p className="text-gray-700">Email: Finadvisor@gmail.com | Phone: (123) 456-7890</p>
+        <p className="text-gray-600 mt-2 text-sm">© 2025 Finadvisor. All rights reserved.</p>
+      </div>
     </div>
-    <div className="absolute w-full bg-gray-200 py-6 px-4 top-1000 text-center">
-  <h3 className="text-2xl font-semibold text-gray-800 mb-2">Contact Us</h3>
-  <p className="text-gray-700">Email: Finadvisor@gmail.com | Phone: (123) 456-7890</p>
-  <p className="text-gray-600 mt-2 text-sm">© 2025 Finadvisor. All rights reserved.</p>
-</div>
+  );
+};
 
-
-  </div> 
-);
-}
 export default Page;

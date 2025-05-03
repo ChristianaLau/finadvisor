@@ -125,7 +125,7 @@ export default function AddIncomeForm() {
 
         <div className="form-button-set">
           <button type="clear" className="submit-button">
-            clear
+            Clear
           </button>
           <button type="submit" className="submit-button">
             Submit

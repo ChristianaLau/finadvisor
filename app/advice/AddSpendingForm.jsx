@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import { addSpending } from "@/lib/actions/finData.actions";
 import {
   periodTypes,
@@ -54,7 +54,18 @@ export default function AddSpendingForm() {
     // Send to API or save to state/storage
   };
   return (
+    <div className="format">
+          <div className="absolute top-0 left-0 p-4">
+            <Image
+              src="/logo_b.png"
+              alt="Logo"
+              width={200} 
+              height={50} 
+              className="object-contain"
+            />
+          </div>
     <div className="form-container">
+      
       <form onSubmit={handleSubmit}>
         <h2 className="form-title">Add Spending</h2>
 
@@ -69,6 +80,7 @@ export default function AddSpendingForm() {
             className="adv-input"
           />
         </div>
+        
 
         <div className="form-set">
           <label>Amount</label>
@@ -154,13 +166,14 @@ export default function AddSpendingForm() {
         )}
         <div className="form-button-set">
           <button type="clear" className="submit-button">
-            clear
+            Clear
           </button>
           <button type="submit" className="submit-button">
             Submit
           </button>
         </div>
       </form>
+    </div>
     </div>
   );
 }
