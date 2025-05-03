@@ -1,5 +1,6 @@
 import AddSpendingForm from "./AddSpendingForm";
 import AddIncomeForm from "./AddIncomeForm";
+import InitialSurvey from "./InitialSurvey";
 // goal is to grow saving
 //   put it into growth savings account
 //   invest
@@ -34,8 +35,9 @@ export default function advicePage() {
 
   return (
     <div className="surveypage">
-        <AddSpendingForm/>
+        <InitialSurvey/>
         <AddIncomeForm/>
+        <AddSpendingForm/>
       
       {/* display pie chart if data */}
       {/* display what they can save on */}

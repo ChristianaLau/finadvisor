@@ -23,7 +23,7 @@ const finDataSchema = new Schema({
       endDate:Date,
       lastReceived:Date,
     }
-  ],        
+  ],
   income: [
     {
       incomeName: String,
