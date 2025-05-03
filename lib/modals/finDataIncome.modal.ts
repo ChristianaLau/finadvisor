@@ -1,13 +1,10 @@
 import { Schema, model, models } from "mongoose";
 
 const finDataIncomeSchema = new Schema({
-  person: {
-    type: Object,
-    required: true,
-  },
-  created_at: {
-    type: Date,
-    required: true,
+  user: {
+    required: [true, 'Please add a user'],
+    type: Schema.Types.ObjectId,
+    ref: 'User',
   },
   incomeName: String,
   amount: Number,
@@ -17,10 +14,11 @@ const finDataIncomeSchema = new Schema({
   recurringEnd: Date,
   received: Boolean,
   updated_at: Date,
-});
+},{timestamps: true});
+
 
 const finDataIncome =
-  models?.finDataIncomeSchema ||
-  model("finDataIncomeSchema", finDataIncomeSchema, "Nutrixa_Users");
+  models?.Income ||
+  model("Income", finDataIncomeSchema);
 
 export default finDataIncome;

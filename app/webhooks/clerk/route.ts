@@ -55,7 +55,6 @@ export async function POST(req: Request) {
       email_addresses,
       first_name,
       last_name,
-      created_at,
     } = evt.data;
 
     const user = {
@@ -63,7 +62,6 @@ export async function POST(req: Request) {
       email: email_addresses[0].email_address,
       firstName: first_name,
       lastName: last_name,
-      created_at: new Date(created_at),
       person: {},
       daysGoalmet: false,
     };

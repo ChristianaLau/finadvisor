@@ -1,22 +1,21 @@
 import { Schema, model, models } from "mongoose";
 
 const finDataSchema = new Schema({
-  person: {
-    type: Object,
-    required: false,
+  user: {
+    required: [true, 'Please add a user'],
+    type: Schema.Types.ObjectId,
+    ref: 'User',
   },
   rent: {
     type: Number,
     required: false,
   },
-  created_at: {
-    type: Date,
-    required: true,
-  },
-});
 
+},{timestamps: true});
+
+console.log(models)
 const finData =
-  models?.finDataSchema ||
-  model("finDataSchema", finDataSchema, "Nutrixa_Users");
+  models?.FinData ||
+  model("FinData", finDataSchema);
 
 export default finData;

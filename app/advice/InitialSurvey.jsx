@@ -1,5 +1,5 @@
 "use client";
-import { addIncome } from "@/lib/actions/finData.actions";
+import { createFinDataProfile } from "@/lib/actions/finData.actions";
 import { periodTypes, periodDefault } from "@/app/constants";
 import { useState, useEffect } from "react";
 export default function InitialSurvey({ jobs = [] }) {
@@ -16,30 +16,35 @@ export default function InitialSurvey({ jobs = [] }) {
     payPeriod: 0,
     hoursPerPeriod: 0,
     startDate: new Date().toISOString().slice(0, 10),
+    endDate:"",
     recurringEnd: "",
   });
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+    // console.log(name, value, type, checked)
     setForm((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
     e.preventDefault();
 
     const payload = {
       rent: form.rent,
+      // unemployed:form.unemployed,
       jobName: form.jobName,
       payPeriod: parseInt(form.payPeriod),
       hoursPerPeriod: form.hoursPerPeriod,
       startDate: form.startDate,
       recurringEnd: "",
+      endDate:form.startDate,
       updated: new Date().toISOString(),
     };
     console.log("Submitted data:", payload);
-    let added = addIncome(payload);
+    let added = await createFinDataProfile(payload);
+    console.log(added)
     // Send to API or save to state/storage
   };
   return (
@@ -86,12 +91,12 @@ export default function InitialSurvey({ jobs = [] }) {
                 ))}
               </select>
             </div>
-            {form.payperiod > 1 && (
+            {form.payPeriod  > 1 && (
               <div className="form-set">
-                <label>Rent</label>
+                <label>Hours per pay Period</label>
                 <input
-                  type="hoursPerPeriod"
-                  name="rent"
+                  type="number"
+                  name="hoursPerPeriod"
                   value={form.hoursPerPeriod}
                   onChange={handleChange}
                   className="adv-input"
@@ -102,8 +107,8 @@ export default function InitialSurvey({ jobs = [] }) {
               <label>Date Start</label>
               <input
                 type="date"
-                name="recurring"
-                value={form.recurringStart}
+                name="startDate"
+                value={form.startDate}
                 onChange={handleChange}
                 className="adv-checkbox"
               />
@@ -112,8 +117,8 @@ export default function InitialSurvey({ jobs = [] }) {
               <label>Date End</label>
               <input
                 type="date"
-                name="recurring"
-                value={form.recurringEnd}
+                name="endDate"
+                value={form.endDate}
                 onChange={handleChange}
                 className="adv-checkbox"
               />
