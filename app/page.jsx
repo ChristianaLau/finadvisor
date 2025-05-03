@@ -1,10 +1,19 @@
+'use client'; 
+
 import { ClerkProvider, SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import Image from "next/image";
+import { VictoryLine, VictoryChart, VictoryAxis, VictoryBar, VictoryTheme} from 'victory';
+const financialData = [
+  { quarter: 'Q1', earnings: 18500, expenses: 12200, profit: 6300 },
+  { quarter: 'Q2', earnings: 22400, expenses: 15800, profit: 6600 },
+  { quarter: 'Q3', earnings: 19800, expenses: 14500, profit: 5300 },
+  { quarter: 'Q4', earnings: 26500, expenses: 18200, profit: 8300 }
+];
+
 
 const Page = () => {
   return (
     <div className="relative min-h-screen">
-      {/* Background Image */}
       <Image
         src="/blue_background.png"
         alt="Blue background"
@@ -14,7 +23,6 @@ const Page = () => {
         priority
       />
       
-      {/* Logo in top-left corner */}
       <div className="absolute top-0 left-0 p-4">
         <Image
           src="/logo.png"
@@ -25,8 +33,7 @@ const Page = () => {
         />
       </div>
 
-      {/* Auth Buttons - Top Right */}
-      <div className="absolute top-160 left-52 p-4 flex gap-20">
+      <div className="absolute top-150 left-52 p-4 flex gap-20">
         <SignedOut>
           <SignInButton>
             <button className="bg-white text-black px-12 py-4 rounded-lg font-medium hover:bg-gray-100 transition text-xl shadow-md">
@@ -40,11 +47,10 @@ const Page = () => {
           </SignUpButton>
         </SignedOut>
         <SignedIn>
-          <UserButton afterSignOutUrl="/" />
+        <UserButton afterSignOutUrl="/" />
         </SignedIn>
       </div>
 
-      {/* Woman with phone image */}
       <div className="absolute top-50 right-50 p-4">
         <Image
           src="/woman_phone.png"
@@ -54,32 +60,28 @@ const Page = () => {
           className="object-contain"
         />
       </div>
-
       <div className="relative z-10 top-60 left-30 container mx-auto px-4 py-20 text-left">
         <h1 className="text-8xl font-bold text-white mb-6">Plan Smarter,</h1>
         <h2 className="text-8xl font-bold text-white mb-6">Live Better.</h2>
       </div>
-
-      <div className="relative z-10 top-180 left-0 container mx-auto px-4 py-20 text-left">
+   {/* Text Section */}
+      <div className="relative z-10 top-200 left-0 container mx-auto px-4 py-20 text-left">
         <h1 className="text-8xl font-bold text-black mb-6">Revolutionize Your Spending</h1>
         <p className="text-5xl font-bold text-black mb-6">Today.</p>
-        <ul className="text-3xl relative top-10 space-y-4"><li>See exactly how much you make</li>
+        <ul className="text-3xl relative top-20 space-y-4"><li>See exactly how much you make</li>
 
         <li>Know where every dollar goes</li>
-
         <li>Auto-calculate taxes with W-2 or manual input</li>
-
         <li>Categorize and break down expenses</li>
-
         <li>Instantly know how much you’re saving</li>
 </ul>
       </div>
 
 
-      <div className="absolute z-10 top-430 left-20 container mx-auto px-4 py-20 text-left">
+      <div className="absolute z-10 top-530 left-20 container mx-auto px-4 py-20 text-left">
         <h1 className="text-8xl font-bold text-black mb-6"> Smarter Choices, Bigger Savings</h1>
         <p className="text-5xl font-bold text-black mb-6">Today.</p>
-        <ul className="text-3xl relative top-10 space-y-4">  <li>Set goals and track your progress</li>
+        <ul className="text-3xl relative top-20 space-y-4">  <li>Set goals and track your progress</li>
   <li>Get tips based on your goals</li>
   <li>Spot habits that hurt your savings</li>
   <li>Understand where your money goes</li>
@@ -87,17 +89,149 @@ const Page = () => {
 </ul>
       </div>
 
-      <div className="absolute top-340 right-50 p-4">
-        <Image
-          src="/linegraph.jpg"
-          alt="graph"
-          width={700} 
-          height={1600} 
-          className="object-contain"
+   {/* Graphs Section */}
+      <div className="absolute top-380 right-50 p-4 w-[650px] h-[350px] bg-white rounded-lg shadow-xl">
+  <VictoryChart
+    domainPadding={20}
+    padding={{ top: 40, bottom: 60, left: 60, right: 40 }}
+  >
+    <VictoryAxis
+      tickValues={[1, 2, 3, 4, 5]}
+      tickFormat={["Jan", "Feb", "Mar", "Apr", "May"]}
+      style={{
+        tickLabels: { fontSize: 12, padding: 10 },
+        axis: { stroke: "#cbd5e0" }
+      }}
+    />
+    <VictoryAxis
+      dependentAxis
+      tickFormat={(x) => `$${x / 1000}k`}
+      style={{
+        tickLabels: { fontSize: 12, padding: 10 },
+        axis: { stroke: "#cbd5e0" }
+      }}
+    />
+    <VictoryLine
+      data={[
+        { x: 1, y: 4000 },
+        { x: 2, y: 7200 },
+        { x: 3, y: 3800 },
+        { x: 4, y: 8900 },
+        { x: 5, y: 9500 },
+      ]}
+      style={{
+        data: { stroke: "#8b5cf6", strokeWidth: 3 },
+        parent: { border: "1px solid #ccc" }
+      }}
+    />
+  </VictoryChart>
+</div>
+<div className="absolute top-600 right-70 p-6 w-[500px] bg-white rounded-lg shadow-xl flex flex-col">
+      <VictoryChart
+        theme={VictoryTheme.material}
+        domainPadding={{ x: 30 }}
+      >
+        <VictoryAxis
+          tickFormat={["Q1", "Q2", "Q3", "Q4"]}
+          style={{
+            tickLabels: { fontSize: 12, padding: 5, fill: "#4b5563" },
+            axis: { stroke: "#e5e7eb" }
+          }}
         />
+        <VictoryAxis
+          dependentAxis
+          tickFormat={(x) => `$${x / 1000}k`}
+          style={{
+            tickLabels: { fontSize: 12, fill: "#4b5563" },
+            axis: { stroke: "#e5e7eb" },
+            grid: { stroke:"#f3f4f6" }
+          }}
+        />
+        <VictoryBar
+          data={financialData}
+          x="quarter"
+          y="earnings"
+          style={{
+            data: { fill: "#8b5cf6", width: 20 } 
+          }}
+          cornerRadius={{top: 5 }}
+        />
+        <VictoryBar
+          data={financialData}
+          x="quarter"
+          y="expenses"
+          style={{
+            data: { fill: "#ef4444", width: 20 } 
+          }}
+          cornerRadius={{ top: 5 }}
+        />
+        <VictoryBar
+          data={financialData}
+          x="quarter"
+          y="profit"
+          style={{
+            data: { fill: "#10b981", width: 20 } 
+          }}
+          cornerRadius={{ top: 5 }}
+        />
+      </VictoryChart>
+      
+      {/* Legend */}
+      <div className="flex justify-center mt-4 space-x-6">
+        <div className="flex items-center">
+          <div className="w-4 h-4 bg-[#8b5cf6] mr-2 rounded-sm"></div>
+          <span className="text-sm">Earnings</span>
+        </div>
+        <div className="flex items-center">
+          <div className="w-4 h-4 bg-[#ef4444] mr-2 rounded-sm"></div>
+          <span className="text-sm">Expenses</span>
+        </div>
+        <div className="flex items-center">
+          <div className="w-4 h-4 bg-[#10b981] mr-2 rounded-sm"></div>
+          <span className="text-sm">Profit</span>
+        </div>
       </div>
     </div>
-  );
-}
+    <div className="absolute z-10 top-800 left-0 right-0 text-center px-4 py-20">
+      <h1 className="text-8xl font-bold text-black mb-6">Us, Our Mission</h1>
+      
+      {/* Cards container */}
+      <div className="flex justify-center gap-20 mt-30">
+        <div className="w-[300px] bg-white rounded-xl shadow-md overflow-hidden">
+          <img src="/woman_phone.png" alt="Woman on phone" className="w-full h-48 object-cover" />
+          <div className="p-4">
+            <h3 className="text-lg font-semibold mb-2">Christiana</h3>
+            <p className="text-gray-600">Placeholder Text</p>
+          </div>
+        </div>
 
+        {/* Card 2 */}
+        <div className="w-[300px] bg-white rounded-xl shadow-md overflow-hidden">
+          <img src="/woman_phone.png" alt="Woman on phone" className="w-full h-48 object-cover" />
+          <div className="p-4">
+            <h3 className="text-lg font-semibold mb-2">Kyaw</h3>
+            <p className="text-gray-600">Placeholder Text</p>
+          </div>
+        </div>
+
+        {/* Card 3 */}
+        <div className="w-[300px] bg-white rounded-xl shadow-md overflow-hidden">
+          <img src="/woman_phone.png" alt="Woman on phone" className="w-full h-48 object-cover" />
+          <div className="p-4">
+            <h3 className="text-lg font-semibold mb-2">Cody</h3>
+            <p className="text-gray-600">Placeholder Text</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div className="absolute w-full bg-gray-200 py-6 px-4 top-1000 text-center">
+  <h3 className="text-2xl font-semibold text-gray-800 mb-2">Contact Us</h3>
+  <p className="text-gray-700">Email: Finadvisor@gmail.com | Phone: (123) 456-7890</p>
+  <p className="text-gray-600 mt-2 text-sm">© 2025 Finadvisor. All rights reserved.</p>
+</div>
+
+
+  </div> 
+);
+}
 export default Page;
