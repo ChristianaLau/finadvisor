@@ -17,10 +17,6 @@ const UserSchema = new Schema({
   lastName: {
     type: String,
   },
-  created_at: {
-    type: Date,
-    required: true,
-  },
   person: {
     type: Object,
     required: false,
@@ -30,7 +26,7 @@ const UserSchema = new Schema({
     required: false,
   },
   
-});
+},{timestamps:true});
 
 const User = models?.User || model("User", UserSchema);
 
