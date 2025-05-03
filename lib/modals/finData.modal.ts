@@ -1,29 +1,11 @@
 import { Schema, model, models } from "mongoose";
 
 const finDataSchema = new Schema({
-  salary: {
-    type: Number,
-    required: false,
-  },
-  wage: {
-    type: Number,
-    required: false,
-  },
-  hourly: {
-    type: Boolean,
-  },
-  salaried: {
-    type: Boolean,
-  },
-  weeklyHours: {
-    type: Number,
+  person: {
+    type: Object,
     required: false,
   },
   rent: {
-    type: Number,
-    required: false,
-  },
-  payperiod: {
     type: Number,
     required: false,
   },
@@ -31,10 +13,17 @@ const finDataSchema = new Schema({
     type: Date,
     required: true,
   },
-  person: {
-    type: Object,
-    required: false,
-  },
+  job:[
+    {
+      jobName:String,
+      jobType:String,
+      payPeriod:Number,
+      hoursPerPeriod:Number,
+      startDate:Date,
+      endDate:Date,
+      lastReceived:Date,
+    }
+  ],        
   income: [
     {
       incomeName: String,
@@ -43,7 +32,7 @@ const finDataSchema = new Schema({
       period: Number,
       recurringStart: Date,
       recurringEnd: Date,
-      received:Boolean,
+      received: Boolean,
       updated_at: Date,
     },
   ],

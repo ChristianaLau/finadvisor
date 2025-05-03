@@ -1,4 +1,5 @@
-export const periodDefault = 0;
+export const periodDefault = 1;
+
 export const periodTypes = [
   { label: "One Time", value: periodDefault },
   { label: "Weekly", value: 7 },
@@ -6,9 +7,10 @@ export const periodTypes = [
   { label: "Monthly", value: 30 },
   { label: "yearly", value: 365 },
 ];
+
 export const IncomePeriodTypes = [
+  { label: "hourly", value: 0 },
   { label: "One Time", value: periodDefault },
-  { label: "hourly", value: 1 },
   { label: "Weekly", value: 7 },
   { label: "Biweekly", value: 14 },
   { label: "Monthly", value: 30 },
