@@ -1,0 +1,37 @@
+import { Schema, model, models } from "mongoose";
+
+const UserSchema = new Schema({
+  clerkId: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  firstName: {
+    type: String,
+  },
+  lastName: {
+    type: String,
+  },
+  created_at: {
+    type: Date,
+    required: true,
+  },
+  person: {
+    type: Object,
+    required: false,
+  },
+  daysGoalmet: {
+    type: Boolean,
+    required: false,
+  },
+  
+});
+
+const User = models?.User || model("User", UserSchema, "Nutrixa_Users");
+
+export default User;
