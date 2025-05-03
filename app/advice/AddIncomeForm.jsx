@@ -133,8 +133,8 @@ export default function AddIncomeForm({
               <label>Date Start</label>
               <input
                 type="date"
-                name="recurring"
-                checked={form.recurringStart}
+                name="recurringStart"
+                value={form.recurringStart}
                 onChange={handleChange}
                 className="adv-checkbox"
               />
@@ -143,8 +143,8 @@ export default function AddIncomeForm({
               <label>Date End</label>
               <input
                 type="date"
-                name="recurring"
-                checked={form.recurringEnd}
+                name="recurringEnd"
+                value={form.recurringEnd}
                 onChange={handleChange}
                 className="adv-checkbox"
               />
