@@ -53,7 +53,7 @@ const Page = () => {
           </SignUpButton>
         </SignedOut>
         <SignedIn>
-          <UserButton afterSignOutUrl="/" />
+          <UserButton/>
         </SignedIn>
       </motion.div>
 
