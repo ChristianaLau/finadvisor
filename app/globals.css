@@ -26,9 +26,13 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 .form-container form{
-  align-items: center;
-  justify-content: center;
-  @apply grid grid-cols-1 gap-4 max-w-[600px] mx-auto;
+  @apply grid grid-cols-1 gap-6 w-full max-w-[700px] bg-white shadow-lg rounded-lg p-10;
+}
+.form-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center; 
+  align-items: center;     
 }
 
 .form-title {
@@ -47,8 +51,8 @@ body {
 
 .adv-label {
 }
-.form-set label{
-  @apply block w-40 text-right text-sm font-medium text-gray-700;
+.form-set label {
+  @apply text-sm font-medium text-gray-700;
 }
 .adv-input {
   @apply flex-1 rounded-md border border-gray-300 bg-white text-black;
