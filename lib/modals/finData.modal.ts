@@ -13,42 +13,6 @@ const finDataSchema = new Schema({
     type: Date,
     required: true,
   },
-  job:[
-    {
-      jobName:String,
-      jobType:String,
-      payPeriod:Number,
-      hoursPerPeriod:Number,
-      startDate:Date,
-      endDate:Date,
-      lastReceived:Date,
-    }
-  ],
-  income: [
-    {
-      incomeName: String,
-      amount: Number,
-      recurring: Boolean,
-      period: Number,
-      recurringStart: Date,
-      recurringEnd: Date,
-      received: Boolean,
-      updated_at: Date,
-    },
-  ],
-  spending: [
-    {
-      spendingName: String,
-      amount: Number,
-      recurring: Boolean,
-      period: Number,
-      spendingType: String,
-      wantLevel: Number,
-      recurringStart: Date,
-      recurringEnd: Date,
-      updated_at: Date,
-    },
-  ],
 });
 
 const finData =
