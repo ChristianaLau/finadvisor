@@ -12,20 +12,26 @@ export default function AddSpendingForm() {
   const updateSpendingData = () => {
     // update statedata
   };
+
   const saveSpendingData = () => {
     // update db with spending data
   };
+
   const [form, setForm] = useState({
-    name: "",
+    spendingName: "",
     amount: "",
     recurring: false,
-    period: "one time",
-    type: "one time purchase",
+    period: 1,
+    spendingType: "one time purchase",
+    recurringStart:new Date().toISOString().slice(0, 10),
+    recurringEnd:"",
     wantLevel: 0,
   });
 
   const handleChange = (e) => {
+    console.log(form)
     const { name, value, type, checked } = e.target;
+    console.log(name, value, type, checked)
     setForm((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
@@ -36,11 +42,13 @@ export default function AddSpendingForm() {
     e.preventDefault();
 
     const payload = {
-      name: form.name,
+      spendingName: form.spendingName,
       amount: parseFloat(form.amount),
       recurring: form.recurring,
       period: parseInt(form.period),
-      type: form.type,
+      spendingType: form.spendingType,
+      recurringStart:form.recurringStart,
+      recurringEnd:form.recurringEnd,
       need: true,
       wantLevel: parseInt(form.wantLevel),
       updated: new Date().toISOString(),
@@ -48,23 +56,23 @@ export default function AddSpendingForm() {
     if (form.need) form.wantLevel = 0;
     if (!form.recurring) {
       form.period = periodDefault;
-      form.type = spendingTypeDefault;
+      form.spendingType = spendingTypeDefault;
     }
     console.log("Submitted data:", payload);
     // Send to API or save to state/storage
   };
+
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit}>
         <h2 className="form-title">Add Spending</h2>
 
         <div className="form-set">
-          <label>Name</label>
+          <label>spendingName</label>
           <input
-            // id="name"
             type="text"
-            name="name"
-            value={form.name}
+            name="spendingName"
+            value={form.spendingName}
             onChange={handleChange}
             className="adv-input"
           />
@@ -112,8 +120,8 @@ export default function AddSpendingForm() {
             <div className="form-set">
               <label>Type</label>
               <select
-                name="period"
-                value={form.period}
+                name="spendingType"
+                value={form.spendingType}
                 onChange={handleChange}
                 required
                 className="adv-input"
@@ -124,6 +132,27 @@ export default function AddSpendingForm() {
                   </option>
                 ))}
               </select>
+            </div>
+
+            <div className="form-set">
+              <label>Date Start</label>
+              <input
+                type="date"
+                name="recurringStart"
+                value={form.recurringStart}
+                onChange={handleChange}
+                className="adv-checkbox"
+              />
+            </div>
+            <div className="form-set">
+              <label>Date End</label>
+              <input
+                type="date"
+                name="recurringEnd"
+                value={form.recurringEnd}
+                onChange={handleChange}
+                className="adv-checkbox"
+              />
             </div>
           </>
         )}
@@ -157,7 +186,7 @@ export default function AddSpendingForm() {
             clear
           </button>
           <button type="submit" className="submit-button">
-            Submit
+            Add Spending
           </button>
         </div>
       </form>
