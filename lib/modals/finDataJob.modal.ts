@@ -1,13 +1,10 @@
 import { Schema, model, models } from "mongoose";
 
 const finDataJobSchema = new Schema({
-  person: {
-    type: Object,
-    required: true,
-  },
-  created_at: {
-    type: Date,
-    required: true,
+  user: {
+    required: [true, 'Please add a user'],
+    type: Schema.Types.ObjectId,
+    ref: 'User',
   },
   jobName: String,
   jobType: String,
@@ -16,10 +13,11 @@ const finDataJobSchema = new Schema({
   startDate: Date,
   endDate: Date,
   lastReceived: Date,
-});
+},{timestamps: true});
+
 
 const finDataJob =
-  models?.finDataJobSchema ||
-  model("finDataJobSchema", finDataJobSchema, "Nutrixa_Users");
+  models?.Job ||
+  model("Job", finDataJobSchema);
 
 export default finDataJob;
