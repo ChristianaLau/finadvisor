@@ -7,16 +7,16 @@
   "rent": 600,
   "payperiod": 3,
   "payperiod_": "number of days options [1:daily, 7:weekly, 14:biweekly, ] ",
-  "pay": [
+  "income": [
     {
-      "type": "job",
+      "payType": "job",
       "type_": ["job", "contract", "sidehustle"],
       "amount": 1500,
       "date": "date received",
       "updated": "date_added in app"
     }
   ],
-  "itemized": [
+  "spending": [
     {
       "name": "rent",
       "amount": 1500,

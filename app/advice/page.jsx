@@ -1,4 +1,4 @@
-// import { useEffect, useState } from "react";
+import AddSpendingForm from "./AddSpendingForm";
 
 // goal is to grow saving
 //   put it into growth savings account
@@ -7,34 +7,34 @@
 // if goal is to save more
 //   stop spending if spending too much
 //     they would need to categorize spending to see where they can save
-//     divide spending by categories, 
+//     divide spending by categories,
 //       needs vs wants
 //         needs = bills, food
 //         priority list for wants ranking 1-5
 //         wants = boba, vacation
 
-
-const advicePage = () => {
+export default function advicePage() {
   // const [finData,setFinData] = useState()
   // fin data should be in weekly, biweekly or monthly view based on settings
   // const [timeperiod,settimePeriod] = useState()
   // useEffect(()=>{
-    // get fin data if stored
-    // update db data upon unmount with saved fin data
+  // get fin data if stored
+  // update db data upon unmount with saved fin data
   // })
-  const updateSpendingData=()=>{
+  const updateSpendingData = () => {
     // update statedata
-  }
+  };
 
-  const saveSpendingData=()=>{
+  const saveSpendingData = () => {
     // update db with spending data
-  }
-  const deleteSpendingData=()=>{}
+  };
+  const deleteSpendingData = () => {};
   return (
     <div className="surveypage">
-        {/* display pie chart if data */}
-        {/* display what they can save on */}
+        <AddSpendingForm/>
+      
+      {/* display pie chart if data */}
+      {/* display what they can save on */}
     </div>
   );
 };
-export default advicePage;
