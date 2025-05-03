@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 // goal is to grow saving
 //   put it into growth savings account
@@ -15,13 +15,13 @@ import { useEffect, useState } from "react";
 
 
 const advicePage = () => {
-  const [finData,setFinData] = useState()
+  // const [finData,setFinData] = useState()
   // fin data should be in weekly, biweekly or monthly view based on settings
-  const [timeperiod,settimePeriod] = useState()
-  useEffect(()=>{
+  // const [timeperiod,settimePeriod] = useState()
+  // useEffect(()=>{
     // get fin data if stored
     // update db data upon unmount with saved fin data
-  })
+  // })
   const updateSpendingData=()=>{
     // update statedata
   }
