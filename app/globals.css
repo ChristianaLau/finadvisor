@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -12,15 +13,60 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+.form-container form{
+  align-items: center;
+  justify-content: center;
+  @apply grid grid-cols-1 gap-4 max-w-[600px] mx-auto;
+}
+
+.form-title {
+  text-align: center;
+  @apply text-xl font-semibold;
+}
+
+.form-set {
+  /* @apply flex items-center gap-4; */
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.adv-label {
+}
+.form-set label{
+  @apply block w-40 text-right text-sm font-medium text-gray-700;
+}
+.adv-input {
+  @apply flex-1 rounded-md border border-gray-300 bg-white text-black;
+}
+
+.adv-checkbox {
+  /* @apply w-5 h-5; */
+}
+
+.submit-button {
+  /* @apply px-4 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded hover:bg-blue-700 dark:hover:bg-blue-400; */
+}
+.form-button-set{
+  width: 100%;
+  display:flex;
+  gap:1rem;
+  justify-content: flex-end;
+}
+form button{
+  @apply text-black hover:text-white font-bold py-2 px-4 rounded
 }
