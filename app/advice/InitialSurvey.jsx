@@ -108,8 +108,8 @@ export default function InitialSurvey({ jobs = [] }) {
           <label>Saving Goals</label>
           <input
             type="number"
-            name="goal"
-            value={Number(form.goal).toString()}
+            name="goalAmount"
+            value={Number(form.goalAmount).toString()}
             onChange={handleChange}
             className="adv-input"
           />
