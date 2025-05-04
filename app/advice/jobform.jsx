@@ -72,19 +72,7 @@ export default function InitialSurvey({ jobs = [] }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const payload = {
-      rent: form.rent,
-      // unemployed:form.unemployed,
-      jobName: form.jobName,
-      payPeriod: parseInt(form.payPeriod),
-      hoursPerPeriod: form.hoursPerPeriod,
-      amountperPayPeriod: form.amountperPayPeriod,
-      amountperHour: form.amountperHour,
-      startDate: form.startDate,
-      recurringEnd: "",
-      endDate: form.startDate,
-      updated: new Date().toISOString(),
-    };
+    const payload = form
     console.log("Submitted data:", payload);
     let added = await createFinDataProfile(payload);
     console.log(added);

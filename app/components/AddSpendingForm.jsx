@@ -40,27 +40,29 @@ export default function AddSpendingForm() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const payload = {
-      spendingName: form.spendingName,
-      amount: parseFloat(form.amount),
-      recurring: form.recurring,
-      period: parseInt(form.period),
-      spendingType: form.spendingType,
-      recurringStart: form.recurringStart,
-      recurringEnd: form.recurringEnd,
-      need: true,
-      wantLevel: parseInt(form.wantLevel),
-      updated: new Date().toISOString(),
-    };
+    const payload = form
+    // {
+    //   spendingName: form.spendingName,
+    //   amount: parseFloat(form.amount),
+    //   recurring: form.recurring,
+    //   period: parseInt(form.period),
+    //   spendingType: form.spendingType,
+    //   recurringStart: form.recurringStart,
+    //   recurringEnd: form.recurringEnd,
+    //   need: true,
+    //   wantLevel: parseInt(form.wantLevel),
+    //   updated: new Date().toISOString(),
+    // };
     if (form.need) form.wantLevel = 10;
     if (!form.recurring) {
       form.period = periodDefault;
       form.spendingType = spendingTypeDefault;
     }
-    console.log("Submitted data:", payload);
+    let added = await addSpending(payload);
+    console.log("Submitted data:", payload,added);
     // Send to API or save to state/storage
   };
 
