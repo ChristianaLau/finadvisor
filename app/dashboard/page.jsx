@@ -183,11 +183,11 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="w-[600px] bg-white rounded-lg shadow-md p-12 mt-10">
+            <div className="relative w-[600px] bg-white rounded-lg shadow-md p-12 mt-10">
               <h1 className="text-2xl text-gray-800 font-bold text-center">
                 Income vs. Expenses
               </h1>
-              <PopUpModal>
+              <PopUpModal buttontype="add">
                 <TransactionForm></TransactionForm>
               </PopUpModal>
               <div className="flex justify-between text-gray-800 mt-4">

@@ -6,7 +6,7 @@ export default function PopUpModal({ buttontype = "text", text = "Open", childre
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="p-8">
+    <div className="absolute top-2 right-2">
       <button
         onClick={() => setIsOpen(true)}
         className="px-4 py-2 bg-blue-600 text-white rounded"
