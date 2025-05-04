@@ -177,27 +177,53 @@ const Page = () => {
         </div>
       </motion.div>
 
-      {/*Team section animated*/}
-      <div className="absolute z-10 top-800 left-0 right-0 text-center px-4 py-20">
-        <h1 className="text-8xl font-bold text-black mb-6">Us, Our Mission</h1>
-        <div className="flex justify-center gap-20 mt-30">
-          {["Christiana", "Kyaw", "Cody"].map((name, index) => (
-            <motion.div
-              key={name}
-              className="w-[300px] bg-white rounded-xl shadow-md overflow-hidden"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.3 }}
-            >
-              <img src="/woman_phone.png" alt="Woman on phone" className="w-full h-48 object-cover" />
-              <div className="p-4">
-                <h3 className="text-lg font-semibold mb-2">{name}</h3>
-                <p className="text-gray-600">Placeholder Text</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+  {/* Team section animated */}
+<div className="absolute z-10 top-800 left-0 right-0 text-center px-4 py-20">
+  <h1 className="text-8xl font-bold text-black mb-6">Us, Our Mission</h1>
+  <div className="flex justify-center gap-20 mt-30">
+    
+    <motion.div
+      className="w-[300px] bg-white rounded-xl shadow-md overflow-hidden"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0 }}
+    >
+      <img src="/me.png" alt="Woman on phone" className="w-full h-48 object-cover" />
+      <div className="p-4">
+        <h3 className="text-lg font-semibold mb-2">Christiana</h3>
+        <p className="text-gray-600">Placeholder Text</p>
       </div>
+    </motion.div>
+
+    <motion.div
+      className="w-[300px] bg-white rounded-xl shadow-md overflow-hidden"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.3 }}
+    >
+      <img src="/woman_phone.png" alt="Woman on phone" className="w-full h-48 object-cover" />
+      <div className="p-4">
+        <h3 className="text-lg font-semibold mb-2">Kyaw</h3>
+        <p className="text-gray-600">Placeholder Text</p>
+      </div>
+    </motion.div>
+
+    <motion.div
+      className="w-[300px] bg-white rounded-xl shadow-md overflow-hidden"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.6 }}
+    >
+      <img src="/Cody-headshot.jpg" alt="Woman on phone" className="w-full h-48 object-cover" />
+      <div className="p-4">
+        <h3 className="text-lg font-semibold mb-2">Cody</h3>
+        <p className="text-gray-600">Placeholder Text</p>
+      </div>
+    </motion.div>
+
+  </div>
+</div>
+
 
       <div className="absolute w-full bg-gray-200 py-6 px-4 top-1000 text-center">
         <h3 className="text-2xl font-semibold text-gray-800 mb-2">Contact Us</h3>

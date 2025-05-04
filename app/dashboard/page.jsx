@@ -57,7 +57,7 @@ export default function Home() {
   const totalExpenses = 1500;
 
   const spendingByCategory = [
-    { category: "Rent", amount: 800 },
+    { category: "Rent", amount: finData?.rent || 0  },
     { category: "Groceries", amount: 200 },
     { category: "Transportation", amount: 100 },
     { category: "Miscellaneous", amount: 400 },
@@ -176,8 +176,8 @@ export default function Home() {
                   <span>- $50</span>
                 </div>
                 <div className="flex justify-between text-gray-800">
-                  <span>Rent Payment</span>
-                  <span>- $800</span>
+                <span>Rent</span>
+                  <span>- ${finData?.rent || 0}</span>
                 </div>
                 <div className="flex justify-between text-gray-800">
                   <span>Freelance Work</span>
