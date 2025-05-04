@@ -106,7 +106,9 @@ export default function Home() {
           `https://newsapi.org/v2/everything?q=finance&language=en&pageSize=6&apiKey=0204ebe0942043ed9cd81b83b2c13e6e`
         );
         const data = await response.json();
-        setArticles(data.articles);
+        if (data?.articles) {
+          setArticles(data.articles);
+        }
       } catch (error) {
         console.error("Error fetching news:", error);
       }
@@ -155,9 +157,8 @@ export default function Home() {
         onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
       />
       <div
-        className={`flex-1 transition-all duration-300 ${
-          isSidebarOpen ? "ml-64" : "ml-20"
-        }`}
+        className={`flex-1 transition-all duration-300 ${isSidebarOpen ? "ml-64" : "ml-20"
+          }`}
       >
         <SignedIn>
           <div className="absolute top-4 right-4 z-20">
@@ -382,12 +383,14 @@ export default function Home() {
                     Latest Finance News
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {articles[0] && <NewsCard article={articles[0]} />}
-                    {articles[1] && <NewsCard article={articles[1]} />}
-                    {articles[2] && <NewsCard article={articles[2]} />}
-                    {articles[3] && <NewsCard article={articles[3]} />}
-                    {articles[4] && <NewsCard article={articles[4]} />}
-                    {articles[5] && <NewsCard article={articles[5]} />}
+                    {articles &&
+                      <>
+                        {articles[0] && <NewsCard article={articles[0]} />}
+                        {articles[1] && <NewsCard article={articles[1]} />}
+                        {articles[2] && <NewsCard article={articles[2]} />}
+                        {articles[3] && <NewsCard article={articles[3]} />}
+                        {articles[4] && <NewsCard article={articles[4]} />}
+                        {articles[5] && <NewsCard article={articles[5]} />}</>}
                   </div>
                 </div>
               </div>
