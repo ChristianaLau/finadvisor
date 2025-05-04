@@ -10,6 +10,7 @@ const finDataSchema = new Schema({
     type: Number,
     required: false,
   },
+  goalAmount:Number,
 
 },{timestamps: true});
 
