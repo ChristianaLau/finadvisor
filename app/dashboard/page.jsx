@@ -3,16 +3,10 @@ import Image from "next/image";
 import { useUser } from "@clerk/nextjs";
 import { SignedIn, UserButton } from "@clerk/nextjs";
 import { getAllFinData } from "@/lib/actions/finData.actions";
-import {
-  VictoryLine,
-  VictoryChart,
-  VictoryAxis,
-  VictoryBar,
-  VictoryTheme,
-  VictoryPie,
-} from "victory";
+import { VictoryLine, VictoryChart, VictoryAxis, VictoryBar, VictoryTheme, VictoryPie } from 'victory';
+import Sidebar from '../components/sidebar';
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import PopUpModal from "@/app/components/PopUpModal";
 import TransactionForm from "../components/TransactionForm";
 
@@ -28,9 +22,33 @@ const ProgressBar = ({ goal, current }) => {
   );
 };
 
+const NewsCard = ({ article }) => (
+  <div className="bg-white rounded-lg shadow-md p-4">
+    <h3 className="text-lg font-bold text-gray-800">{article.title}</h3>
+    {article.urlToImage && (
+      <img
+        src={article.urlToImage}
+        alt={article.title}
+        className="w-full h-40 object-cover rounded mt-2"
+      />
+    )}
+    <p className="text-sm text-gray-600 mt-2 line-clamp-3">{article.description}</p>
+    <a
+      href={article.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-blue-600 text-sm mt-2 block hover:underline"
+    >
+      Read more
+    </a>
+  </div>
+);
+
 export default function Home() {
   const { user } = useUser();
   const [finData, setFinData] = useState({});
+  const [articles, setArticles] = useState([]);
+  const [isSidebarOpen, setIsSidebarOpen]=useState(false);
   const spending = 150;
   const budget = 2150;
   const goalAmount = 3000;
@@ -49,6 +67,24 @@ export default function Home() {
     { x: "Saved", y: savedAmount },
     { x: "Remaining", y: goalAmount - savedAmount },
   ];
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const response = await fetch(
+          `https://newsapi.org/v2/everything?q=finance&language=en&pageSize=6&apiKey=0204ebe0942043ed9cd81b83b2c13e6e`
+        );
+        const data = await response.json();
+        setArticles(data.articles);
+      } catch (error) {
+        console.error("Error fetching news:", error);
+      }
+    };    
+
+    fetchNews();
+  }, []);
+
+
   useEffect(() => {
     async function getdata() {
       let findata = await getAllFinData();
@@ -57,8 +93,11 @@ export default function Home() {
     }
     getdata();
   }, []);
+
   return (
     <div className="flex min-h-screen bg-white relative flex-col items-center">
+      <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
+      <div className={`flex-1 transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-20'}`}>
       <SignedIn>
         <div className="absolute top-4 right-4 z-20">
           <UserButton />
@@ -75,19 +114,11 @@ export default function Home() {
           priority
         />
       </div>
-      <div className="absolute top-0 left-0 p-4">
-        <Image
-          src="/logo_b.png"
-          alt="Logo"
-          width={200}
-          height={50}
-          className="object-contain"
-        />
-      </div>
+      <div className="flex">
       <main className="flex-1 p-10 w-full z-10">
         <div className="max-w-7xl mx-auto">
           <div className="w-full flex justify-center">
-            <div className="w-full md:w-[1200px] bg-white rounded-lg shadow-md p-12 mt-40">
+            <div className="w-full md:w-[1200px] bg-white rounded-lg shadow-md p-12 mt-20">
               <h1 className="text-5xl font-bold text-gray-800">
                 Welcome Back, {user?.firstName || user?.username || "User"}!
               </h1>
@@ -254,8 +285,23 @@ export default function Home() {
               />
             </div>
           </div>
+          <div className="flex justify-center mt-10 w-full">
+              <div className="w-full max-w-7xl px-4">
+                <h2 className="text-5xl font-bold text-gray-800 mb-6 mt-20 text-center">Latest Finance News</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {articles[0] && <NewsCard article={articles[0]} />}
+                    {articles[1] && <NewsCard article={articles[1]} />}
+                    {articles[2] && <NewsCard article={articles[2]} />}
+                    {articles[3] && <NewsCard article={articles[3]} />}
+                    {articles[4] && <NewsCard article={articles[4]} />}
+                    {articles[5] && <NewsCard article={articles[5]} />}
+                </div>
+              </div>
+            </div>
         </div>
       </main>
+    </div>
+    </div>
     </div>
   );
 }
