@@ -1,6 +1,7 @@
 "use client";
 import { createFinDataProfile } from "@/lib/actions/finData.actions";
 import { periodTypes, incomePeriodDefault } from "@/app/constants";
+import { getLocalDateString } from "@/lib/util/datefunct";
 import { useState, useEffect } from "react";
 import { match } from "assert";
 export default function InitialSurvey({ jobs = [] }) {
@@ -18,7 +19,7 @@ export default function InitialSurvey({ jobs = [] }) {
     amountperPayPeriod: 0,
     amountperHour: 0,
     hoursPerPeriod: 0,
-    startDate: new Date().toISOString().slice(0, 10),
+    startDate: getLocalDateString(),
     endDate: "",
     recurringEnd: "",
   });
