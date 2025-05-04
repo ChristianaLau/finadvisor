@@ -10,6 +10,8 @@ const finDataJobSchema = new Schema({
   jobType: String,
   payPeriod: Number,
   hoursPerPeriod: Number,
+  amountperPayPeriod:Number,
+  amountperHour:Number,
   startDate: Date,
   endDate: Date,
   lastReceived: Date,

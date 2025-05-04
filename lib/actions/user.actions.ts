@@ -2,6 +2,7 @@
 
 import User from "@/lib/modals/user.modal";
 import connect from "@/lib/db";
+import { auth } from "@clerk/nextjs/server";
 
 export async function createUser(user: any) {
   try {
@@ -14,3 +15,15 @@ export async function createUser(user: any) {
     throw error; // Re-throw error so you can catch it in the route if needed
   }
 }
+
+export const getUserID = async () => {
+  try {
+    const { userId } = await auth();
+    console.log(userId);
+    const user = await User.findOne({ clerkId: userId });
+    return user.id;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};

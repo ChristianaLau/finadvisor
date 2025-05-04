@@ -2,18 +2,15 @@
 
 import finData from "@/lib/modals/finData.modal";
 import finDataJob from "@/lib/modals/finDataJob.modal";
+import finDataSpending from "@/lib/modals/finDataSpending.modal";
+import finDataIncome from "@/lib/modals/finDataIncome.modal";
 import User from "@/lib/modals/user.modal";
 import connect from "@/lib/db";
-import { currentUser ,auth} from '@clerk/nextjs/server'
+import { getUserID } from "./user.actions";
 
 export async function createFinDataProfile(data: any) {
   try {
-    // let curruser=await currentUser()
-    const { userId } = await auth();
-    console.log(userId)
-    const user = await User.findOne({ clerkId: userId });
-    console.log(user)
-    data.user=user?._id
+    data.user = await getUserID()
     console.log(data)
     await connect();
     const newData = await finData.create(data);
@@ -29,6 +26,7 @@ export async function createFinDataProfile(data: any) {
     console.log(error);
   }
 }
+
 // export async function update(data: any) {
 //   try {
 //     await connect();
@@ -38,19 +36,24 @@ export async function createFinDataProfile(data: any) {
 //     console.log(error);
 //   }
 // }
+
 export async function addSpending(data: any) {
   try {
+    data.user=await getUserID()
     await connect();
-    const newData = await finData.updateOne(data);
+    const newData = await finDataSpending.create(data);
+    console.log(newData)
     return JSON.parse(JSON.stringify(newData));
   } catch (error) {
     console.log(error);
   }
 }
+
 export async function addIncome(data: any) {
   try {
+    data.user=await getUserID()
     await connect();
-    const newData = await finData.updateOne(data);
+    const newData = await finDataIncome.create(data);
     return JSON.parse(JSON.stringify(newData));
   } catch (error) {
     console.log(error);
