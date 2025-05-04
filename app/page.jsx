@@ -53,15 +53,16 @@ const Page = () => {
           </SignUpButton>
         </SignedOut>
         <SignedIn>
-          <UserButton/>
+          <UserButton />
         </SignedIn>
       </motion.div>
 
+      {/*Updated: Woman image now scroll-animated*/}
       <motion.div
         className="absolute top-50 right-50 p-4"
         initial={{ opacity: 0, x: 100 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8 }}
       >
         <Image
           src="/woman_phone.png"
@@ -72,11 +73,12 @@ const Page = () => {
         />
       </motion.div>
 
+      {/*Updated: Hero text now scroll-animated*/}
       <motion.div
         className="relative z-10 top-60 left-30 container mx-auto px-4 py-20 text-left"
         initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.3 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
       >
         <h1 className="text-8xl font-bold text-white mb-6">Plan Smarter,</h1>
         <h2 className="text-8xl font-bold text-white mb-6">Live Better.</h2>
@@ -94,8 +96,14 @@ const Page = () => {
         </ul>
       </div>
 
-      <div className="absolute z-10 top-530 left-20 container mx-auto px-4 py-20 text-left">
-        <h1 className="text-8xl font-bold text-black mb-6"> Smarter Choices, Bigger Savings</h1>
+      {/*Smarter Choices animated*/}
+      <motion.div
+        className="absolute z-10 top-530 left-20 container mx-auto px-4 py-20 text-left"
+        initial={{ opacity: 0, x: -100 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <h1 className="text-8xl font-bold text-black mb-6">Smarter Choices, Bigger Savings</h1>
         <p className="text-5xl font-bold text-black mb-6">Today.</p>
         <ul className="text-3xl relative top-20 space-y-4">
           <li>Set goals and track your progress</li>
@@ -104,43 +112,15 @@ const Page = () => {
           <li>Understand where your money goes</li>
           <li>Separate needs from wants</li>
         </ul>
-      </div>
+      </motion.div>
 
-      <div className="absolute top-380 right-50 p-4 w-[650px] h-[350px] bg-white rounded-lg shadow-xl">
-        <VictoryChart domainPadding={20} padding={{ top: 40, bottom: 60, left: 60, right: 40 }}>
-          <VictoryAxis
-            tickValues={[1, 2, 3, 4, 5]}
-            tickFormat={["Jan", "Feb", "Mar", "Apr", "May"]}
-            style={{
-              tickLabels: { fontSize: 12, padding: 10 },
-              axis: { stroke: "#cbd5e0" }
-            }}
-          />
-          <VictoryAxis
-            dependentAxis
-            tickFormat={(x) => `$${x / 1000}k`}
-            style={{
-              tickLabels: { fontSize: 12, padding: 10 },
-              axis: { stroke: "#cbd5e0" }
-            }}
-          />
-          <VictoryLine
-            data={[
-              { x: 1, y: 4000 },
-              { x: 2, y: 7200 },
-              { x: 3, y: 3800 },
-              { x: 4, y: 8900 },
-              { x: 5, y: 9500 },
-            ]}
-            style={{
-              data: { stroke: "#8b5cf6", strokeWidth: 3 },
-              parent: { border: "1px solid #ccc" }
-            }}
-          />
-        </VictoryChart>
-      </div>
-
-      <div className="absolute top-600 right-70 p-6 w-[500px] bg-white rounded-lg shadow-xl flex flex-col">
+      {/*Chart animated */}
+      <motion.div
+        className="absolute top-600 right-70 p-6 w-[500px] bg-white rounded-lg shadow-xl flex flex-col"
+        initial={{ opacity: 0, x: 100 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6 }}
+      >
         <VictoryChart theme={VictoryTheme.material} domainPadding={{ x: 30 }}>
           <VictoryAxis
             tickFormat={["Q1", "Q2", "Q3", "Q4"]}
@@ -195,19 +175,26 @@ const Page = () => {
             <span className="text-sm">Profit</span>
           </div>
         </div>
-      </div>
+      </motion.div>
 
+      {/*Team section animated*/}
       <div className="absolute z-10 top-800 left-0 right-0 text-center px-4 py-20">
         <h1 className="text-8xl font-bold text-black mb-6">Us, Our Mission</h1>
         <div className="flex justify-center gap-20 mt-30">
-          {["Christiana", "Kyaw", "Cody"].map((name) => (
-            <div key={name} className="w-[300px] bg-white rounded-xl shadow-md overflow-hidden">
+          {["Christiana", "Kyaw", "Cody"].map((name, index) => (
+            <motion.div
+              key={name}
+              className="w-[300px] bg-white rounded-xl shadow-md overflow-hidden"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.3 }}
+            >
               <img src="/woman_phone.png" alt="Woman on phone" className="w-full h-48 object-cover" />
               <div className="p-4">
                 <h3 className="text-lg font-semibold mb-2">{name}</h3>
                 <p className="text-gray-600">Placeholder Text</p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
