@@ -13,7 +13,7 @@ const finDataSchema = new Schema({
 
 },{timestamps: true});
 
-console.log(models)
+// console.log(models)
 const finData =
   models?.FinData ||
   model("FinData", finDataSchema);

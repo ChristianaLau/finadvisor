@@ -19,9 +19,10 @@ export async function createUser(user: any) {
 export const getUserID = async () => {
   try {
     const { userId } = await auth();
-    console.log(userId);
+    // console.log(userId);
     const user = await User.findOne({ clerkId: userId });
-    return user.id;
+    console.log(user)
+    return user._id;
   } catch (error) {
     console.error(error);
     throw error;

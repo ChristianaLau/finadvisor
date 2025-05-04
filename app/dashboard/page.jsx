@@ -2,10 +2,12 @@
 import Image from "next/image";
 import { useUser } from '@clerk/nextjs';
 import { SignedIn, UserButton } from '@clerk/nextjs';
+import { getAllFinData } from "@/lib/actions/finData.actions";
 import { VictoryLine, VictoryChart, VictoryAxis, VictoryBar, VictoryTheme, VictoryPie } from 'victory';
 import { motion } from "framer-motion";
-
+import { useEffect,useState } from "react";
 const ProgressBar = ({ goal, current }) => {
+
   const progress = (current / goal) * 100;
   return (
     <div className="w-full bg-gray-200 rounded-full h-6">
@@ -19,6 +21,7 @@ const ProgressBar = ({ goal, current }) => {
 
 export default function Home() {
   const { user } = useUser();
+  const [finData,setFinData]=useState({})
   const spending = 150;
   const budget = 2150;
   const goalAmount = 3000;
@@ -39,7 +42,15 @@ export default function Home() {
     { x: "Saved", y: savedAmount },
     { x: "Remaining", y: goalAmount - savedAmount },
   ];
+  useEffect(()=>{
+    async function getdata(){
 
+      let findata= await getAllFinData()
+      console.log(findata)
+      setFinData(findata)
+    }
+    getdata()
+  },[])
   return (
     <div className="flex min-h-screen bg-white relative flex-col items-center">
       <SignedIn>
