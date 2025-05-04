@@ -66,7 +66,7 @@ export default function AddSpendingForm() {
 
   return (
     <div className="format">
-      <div className="absolute top-0 left-0 p-4">
+      {/* <div className="absolute top-0 left-0 p-4">
         <Image
           src="/logo_b.png"
           alt="Logo"
@@ -74,7 +74,7 @@ export default function AddSpendingForm() {
           height={50}
           className="object-contain"
         />
-      </div>
+      </div> */}
       <div className="form-container">
         <form onSubmit={handleSubmit}>
           <h2 className="form-title">Add Spending</h2>
@@ -110,6 +110,22 @@ export default function AddSpendingForm() {
               className="adv-checkbox"
             />
           </div>
+          <div className="form-set">
+            <label>Type</label>
+            <select
+              name="spendingType"
+              value={form.spendingType}
+              onChange={handleChange}
+              required
+              className="adv-input"
+            >
+              {spendingType.map(({ label, value }) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </div>
           {form.recurring && (
             <>
               <div className="form-set">
@@ -122,23 +138,6 @@ export default function AddSpendingForm() {
                   className="adv-input"
                 >
                   {periodTypes.map(({ label, value }) => (
-                    <option key={value} value={value}>
-                      {label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="form-set">
-                <label>Type</label>
-                <select
-                  name="spendingType"
-                  value={form.spendingType}
-                  onChange={handleChange}
-                  required
-                  className="adv-input"
-                >
-                  {spendingType.map(({ label, value }) => (
                     <option key={value} value={value}>
                       {label}
                     </option>
