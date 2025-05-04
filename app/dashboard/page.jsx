@@ -5,9 +5,9 @@ import { SignedIn, UserButton } from '@clerk/nextjs';
 import { getAllFinData } from "@/lib/actions/finData.actions";
 import { VictoryLine, VictoryChart, VictoryAxis, VictoryBar, VictoryTheme, VictoryPie } from 'victory';
 import { motion } from "framer-motion";
-import { useEffect,useState } from "react";
-const ProgressBar = ({ goal, current }) => {
+import { useEffect, useState } from "react";
 
+const ProgressBar = ({ goal, current }) => {
   const progress = (current / goal) * 100;
   return (
     <div className="w-full bg-gray-200 rounded-full h-6">
@@ -21,14 +21,19 @@ const ProgressBar = ({ goal, current }) => {
 
 export default function Home() {
   const { user } = useUser();
-  const [finData,setFinData]=useState({})
+  const [finData, setFinData] = useState({});
   const spending = 150;
   const budget = 2150;
   const goalAmount = 3000;
   const savedAmount = 1000;
   const income = 2000;
   const totalExpenses = 1500;
-  
+
+  const transactions = [
+    { label: "Grocery Shopping", amount: -50 },
+    { label: "Rent Payment", amount: -800 },
+    { label: "Freelance Work", amount: 500 }
+  ];
 
   const spendingByCategory = [
     { category: "Rent", amount: 800 },
@@ -37,20 +42,20 @@ export default function Home() {
     { category: "Miscellaneous", amount: 400 },
   ];
 
-  
   const pieChartData = [
     { x: "Saved", y: savedAmount },
     { x: "Remaining", y: goalAmount - savedAmount },
   ];
-  useEffect(()=>{
-    async function getdata(){
 
-      let findata= await getAllFinData()
-      console.log(findata)
-      setFinData(findata)
+  useEffect(() => {
+    async function getdata() {
+      let findata = await getAllFinData();
+      console.log(findata);
+      setFinData(findata);
     }
-    getdata()
-  },[])
+    getdata();
+  }, []);
+
   return (
     <div className="flex min-h-screen bg-white relative flex-col items-center">
       <SignedIn>
@@ -69,6 +74,7 @@ export default function Home() {
           priority
         />
       </div>
+
       <div className="absolute top-0 left-0 p-4">
         <Image
           src="/logo_b.png"
@@ -78,6 +84,7 @@ export default function Home() {
           className="object-contain"
         />
       </div>
+
       <main className="flex-1 p-10 w-full z-10">
         <div className="max-w-7xl mx-auto">
           <div className="w-full flex justify-center">
@@ -109,40 +116,35 @@ export default function Home() {
               </h2>
             </div>
           </div>
+
           <div className="flex justify-center space-x-10 mt-10 w-full">
-            {/* Recent Transactions Section */}
-              <div className="w-[600px] bg-white rounded-lg shadow-md p-12">
-                <h2 className="text-2xl text-gray-800 font-bold text-center mb-4">Recent Transactions</h2>
-                <div className="space-y-4">
-                  <div className="flex justify-between text-gray-800">
-                    <span>Grocery Shopping</span>
-                    <span>- $50</span>
+            <div className="w-[600px] bg-white rounded-lg shadow-md p-12">
+              <h2 className="text-2xl text-gray-800 font-bold text-center mb-4">Recent Transactions</h2>
+              <div className="space-y-4">
+                {transactions.map((t, idx) => (
+                  <div key={idx} className="flex justify-between text-gray-800">
+                    <span>{t.label}</span>
+                    <span className={t.amount < 0 ? "text-red-500" : "text-green-600"}>
+                      {t.amount < 0 ? `- $${Math.abs(t.amount)}` : `+ $${t.amount}`}
+                    </span>
                   </div>
-                  <div className="flex justify-between text-gray-800">
-                    <span>Rent Payment</span>
-                    <span>- $800</span>
-                  </div>
-                  <div className="flex justify-between text-gray-800">
-                    <span>Freelance Work</span>
-                    <span>+ $500</span>
-                  </div>
-                </div>
+                ))}
               </div>
-     
+            </div>
+
             <div className="w-[600px] bg-white rounded-lg shadow-md p-12 mt-10">
               <h1 className="text-2xl text-gray-800 font-bold text-center">Income vs. Expenses</h1>
               <div className="flex justify-between text-gray-800 mt-4">
                 <span>Income</span>
-                <span>+ ${income}</span>
+                <span className="text-green-600">+ ${income}</span>
               </div>
               <div className="flex justify-between text-gray-800 mt-2">
                 <span>Expenses</span>
-                <span>- ${totalExpenses}</span>
+                <span className="text-red-500">- ${totalExpenses}</span>
               </div>
             </div>
           </div>
 
-          {/* Graphs Section */}
           <div className="flex justify-center space-x-10 mt-10 w-full">
             <div className="w-[600px] bg-white rounded-lg shadow-md p-12">
               <h2 className="text-2xl text-gray-800 font-bold text-center mb-4">Total Amount in Account</h2>
