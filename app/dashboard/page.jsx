@@ -163,7 +163,10 @@ export default function Home() {
             </div>
           </div>
           <div className="flex justify-center space-x-10 mt-10 w-full">
-            <div className="w-[600px] bg-white rounded-lg shadow-md p-12">
+            <div className="relative w-[600px] bg-white rounded-lg shadow-md p-12">
+              <PopUpModal buttontype="add">
+                <TransactionForm></TransactionForm>
+              </PopUpModal>
               <h2 className="text-2xl text-gray-800 font-bold text-center mb-4">
                 Recent Transactions
               </h2>
@@ -187,9 +190,6 @@ export default function Home() {
               <h1 className="text-2xl text-gray-800 font-bold text-center">
                 Income vs. Expenses
               </h1>
-              <PopUpModal buttontype="add">
-                <TransactionForm></TransactionForm>
-              </PopUpModal>
               <div className="flex justify-between text-gray-800 mt-4">
                 <span>Income</span>
                 <span>+ ${income}</span>
