@@ -253,11 +253,11 @@ export default function Home() {
                           <tr className="" key={idx}>
                             <td className="  p-4">{item.name}</td>
                             <td className="  p-4">{item.category}</td>
-                            <td className="flex justify-between text-right p-4">
-                              <span className="text-xl">
+                            <td className={"flex justify-between text-right p-4 " + (item.spending ? "text-red-500" : "text-green-600")}>
+                              <span className={"text-xl"}>
                                 {item.spending ? "-" : "+"}
                               </span>{" "}
-                              <span>${item.amount}</span>
+                              <span >${item.amount}</span>
                             </td>
                           </tr>
                         ))}
