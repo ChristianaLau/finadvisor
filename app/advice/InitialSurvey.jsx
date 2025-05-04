@@ -99,7 +99,7 @@ export default function InitialSurvey({ jobs = [] }) {
           <input
             type="number"
             name="rent"
-            value={form.rent}
+            value={Number(form.rent).toString()}
             onChange={handleChange}
             className="adv-input"
           />
@@ -109,7 +109,7 @@ export default function InitialSurvey({ jobs = [] }) {
           <input
             type="number"
             name="goal"
-            value={form.goal}
+            value={Number(form.goal).toString()}
             onChange={handleChange}
             className="adv-input"
           />
@@ -161,7 +161,7 @@ export default function InitialSurvey({ jobs = [] }) {
                   <input
                     type="number"
                     name="hoursPerPeriod"
-                    value={form.hoursPerPeriod}
+                    value={Number(form.hoursPerPeriod).toString()}
                     onChange={handleChange}
                     className="adv-input"
                   />

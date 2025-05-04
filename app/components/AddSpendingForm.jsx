@@ -95,7 +95,7 @@ export default function AddSpendingForm() {
             <input
               type="number"
               name="amount"
-              value={form.amount}
+              value={Number(form.amount).toString()}
               onChange={handleChange}
               className="adv-input"
             />
@@ -183,7 +183,7 @@ export default function AddSpendingForm() {
               <input
                 type="number"
                 name="wantLevel"
-                value={form.wantLevel}
+                value={Number(form.wantLevel).toString()}
                 onChange={handleChange}
                 className="adv-input"
                 min="0"
