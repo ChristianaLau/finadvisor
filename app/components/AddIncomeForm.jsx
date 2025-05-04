@@ -57,8 +57,11 @@ export default function AddIncomeForm({ jobs = [] }) {
     // payload.amount=parseFloat(form.amount).toFixed(2)
     // payload.period=parseInt(form.period)
     console.log("Submitted data:", payload);
-    let added = await addIncome(payload);
     // Send to API or save to state/storage
+    let added = await addIncome(payload);
+    if (added) {
+      window.location.reload();
+    }
   };
   return (
     <div className="form-container">

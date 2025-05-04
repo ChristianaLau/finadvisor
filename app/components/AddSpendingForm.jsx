@@ -43,7 +43,7 @@ export default function AddSpendingForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const payload = form
+    const payload = form;
     // {
     //   spendingName: form.spendingName,
     //   amount: parseFloat(form.amount),
@@ -62,8 +62,11 @@ export default function AddSpendingForm() {
       form.spendingType = spendingTypeDefault;
     }
     let added = await addSpending(payload);
-    console.log("Submitted data:", payload,added);
+    console.log("Submitted data:", payload, added);
     // Send to API or save to state/storage
+    if (added) {
+      window.location.reload();
+    }
   };
 
   return (
