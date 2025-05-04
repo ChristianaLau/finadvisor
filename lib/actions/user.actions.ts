@@ -2,7 +2,7 @@
 
 import User from "@/lib/modals/user.modal";
 import connect from "@/lib/db";
-import { auth } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 
 export async function createUser(user: any) {
   try {
@@ -18,10 +18,18 @@ export async function createUser(user: any) {
 
 export const getUserID = async () => {
   try {
+    let uid;
+    // try {
     const { userId } = await auth();
-    // console.log(userId);
-    const user = await User.findOne({ clerkId: userId });
-    console.log(user)
+    uid = userId;
+    // } catch (error) {
+    //   const cu = await currentUser();
+    //   uid = cu?.id;
+    // }
+   console.log(userId);
+    await connect();
+    const user = await User.findOne({ clerkId: uid });
+    console.log(user);
     return user._id;
   } catch (error) {
     console.error(error);

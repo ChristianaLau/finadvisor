@@ -126,4 +126,47 @@ export async function getAllFinData() {
   } catch (error) {
     console.log(error);
   }
+<<<<<<< HEAD
 }
+=======
+}
+
+export async function deleteIncomeSource(userId = undefined) {
+  try {
+    if (!userId) {
+      userId = await getUserID();
+    }
+    await connect();
+    const newData = await finDataIncome.find({ user: userId }).exec();
+    return JSON.parse(JSON.stringify(newData));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function deleteSpendingList(userId = undefined) {
+  try {
+    if (!userId) {
+      userId = await getUserID();
+    }
+    await connect();
+    const newData = await finDataSpending.find({ user: userId }).exec();
+    return JSON.parse(JSON.stringify(newData));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function deleteJobList(userId = undefined) {
+  try {
+    if (!userId) {
+      userId = await getUserID();
+    }
+    await connect();
+    const newData = await finDataJob.find({ user: userId }).exec();
+    return JSON.parse(JSON.stringify(newData));
+  } catch (error) {
+    console.log(error);
+  }
+}
+>>>>>>> refs/remotes/origin/main

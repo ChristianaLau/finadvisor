@@ -1,5 +1,5 @@
-import AddSpendingForm from "./AddSpendingForm";
-import AddIncomeForm from "./AddIncomeForm";
+import AddSpendingForm from "../components/AddSpendingForm";
+import AddIncomeForm from "../components/AddIncomeForm";
 import InitialSurvey from "./InitialSurvey";
 // goal is to grow saving
 //   put it into growth savings account

@@ -40,33 +40,38 @@ export default function AddSpendingForm() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const payload = {
-      spendingName: form.spendingName,
-      amount: parseFloat(form.amount),
-      recurring: form.recurring,
-      period: parseInt(form.period),
-      spendingType: form.spendingType,
-      recurringStart: form.recurringStart,
-      recurringEnd: form.recurringEnd,
-      need: true,
-      wantLevel: parseInt(form.wantLevel),
-      updated: new Date().toISOString(),
-    };
+    const payload = form;
+    // {
+    //   spendingName: form.spendingName,
+    //   amount: parseFloat(form.amount),
+    //   recurring: form.recurring,
+    //   period: parseInt(form.period),
+    //   spendingType: form.spendingType,
+    //   recurringStart: form.recurringStart,
+    //   recurringEnd: form.recurringEnd,
+    //   need: true,
+    //   wantLevel: parseInt(form.wantLevel),
+    //   updated: new Date().toISOString(),
+    // };
     if (form.need) form.wantLevel = 10;
     if (!form.recurring) {
       form.period = periodDefault;
       form.spendingType = spendingTypeDefault;
     }
-    console.log("Submitted data:", payload);
+    let added = await addSpending(payload);
+    console.log("Submitted data:", payload, added);
     // Send to API or save to state/storage
+    if (added) {
+      window.location.reload();
+    }
   };
 
   return (
     <div className="format">
-      <div className="absolute top-0 left-0 p-4">
+      {/* <div className="absolute top-0 left-0 p-4">
         <Image
           src="/logo_b.png"
           alt="Logo"
@@ -74,7 +79,7 @@ export default function AddSpendingForm() {
           height={50}
           className="object-contain"
         />
-      </div>
+      </div> */}
       <div className="form-container">
         <form onSubmit={handleSubmit}>
           <h2 className="form-title">Add Spending</h2>
@@ -95,7 +100,7 @@ export default function AddSpendingForm() {
             <input
               type="number"
               name="amount"
-              value={form.amount}
+              value={Number(form.amount).toString()}
               onChange={handleChange}
               className="adv-input"
             />
@@ -110,6 +115,22 @@ export default function AddSpendingForm() {
               className="adv-checkbox"
             />
           </div>
+          <div className="form-set">
+            <label>Type</label>
+            <select
+              name="spendingType"
+              value={form.spendingType}
+              onChange={handleChange}
+              required
+              className="adv-input"
+            >
+              {spendingType.map(({ label, value }) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </div>
           {form.recurring && (
             <>
               <div className="form-set">
@@ -122,23 +143,6 @@ export default function AddSpendingForm() {
                   className="adv-input"
                 >
                   {periodTypes.map(({ label, value }) => (
-                    <option key={value} value={value}>
-                      {label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="form-set">
-                <label>Type</label>
-                <select
-                  name="spendingType"
-                  value={form.spendingType}
-                  onChange={handleChange}
-                  required
-                  className="adv-input"
-                >
-                  {spendingType.map(({ label, value }) => (
                     <option key={value} value={value}>
                       {label}
                     </option>
@@ -184,7 +188,7 @@ export default function AddSpendingForm() {
               <input
                 type="number"
                 name="wantLevel"
-                value={form.wantLevel}
+                value={Number(form.wantLevel).toString()}
                 onChange={handleChange}
                 className="adv-input"
                 min="0"

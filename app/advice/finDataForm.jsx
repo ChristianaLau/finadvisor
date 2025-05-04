@@ -87,7 +87,7 @@ export default function InitialSurvey({ jobs = [] }) {
           <input
             type="number"
             name="rent"
-            value={Number(form.rent).toString()}
+            value={form.rent}
             onChange={handleChange}
             className="adv-input"
           />
@@ -96,106 +96,10 @@ export default function InitialSurvey({ jobs = [] }) {
           <label>Saving Goals</label>
           <input
             type="number"
-            name="goalAmount"
-            value={Number(form.goalAmount).toString()}
+            name="goal"
+            value={form.goal}
             onChange={handleChange}
             className="adv-input"
-          />
-        </div>
-        {!form.unemployed && (
-          <>
-            <div className="form-set">
-              <label>Job</label>
-              <input
-                // id="name"
-                type="text"
-                name="jobName"
-                value={form.jobName}
-                onChange={handleChange}
-                className="adv-input"
-              />
-            </div>
-
-            <div className="form-set">
-              <label>Period</label>
-              <select
-                name="payPeriod"
-                value={form.payPeriod}
-                onChange={handleChange}
-                required
-                className="adv-input"
-              >
-                {periodTypes.map(({ label, value }) => (
-                  <option key={value} value={value}>
-                    {label}
-                  </option>
-                ))}
-              </select>
-            </div>
-            {form.payPeriod > 1 && (
-              <>
-                <div className="form-set">
-                  <label>hourly wage</label>
-                  <input
-                    type="currency"
-                    name="amountperHour"
-                    value={form.amountperHour}
-                    onChange={handleChange}
-                    className="adv-input"
-                  />
-                </div>
-                <div className="form-set">
-                  <label>Hours per pay Period</label>
-                  <input
-                    type="number"
-                    name="hoursPerPeriod"
-                    value={Number(form.hoursPerPeriod).toString()}
-                    onChange={handleChange}
-                    className="adv-input"
-                  />
-                </div>
-              </>
-            )}
-            <div className="form-set">
-              <label>Amount Earned per Pay period</label>
-              <input
-                type="currency"
-                name="amountperPayPeriod"
-                value={form.amountperPayPeriod}
-                onChange={handleChange}
-                className="adv-input"
-              />
-            </div>
-            <div className="form-set">
-              <label>Date Start</label>
-              <input
-                type="date"
-                name="startDate"
-                value={form.startDate}
-                onChange={handleChange}
-                className="adv-checkbox"
-              />
-            </div>
-            <div className="form-set">
-              <label>Date End</label>
-              <input
-                type="date"
-                name="endDate"
-                value={form.endDate}
-                onChange={handleChange}
-                className="adv-checkbox"
-              />
-            </div>
-          </>
-        )}
-        <div className="form-set">
-          <label>Unemployed</label>
-          <input
-            type="checkbox"
-            name="unemployed"
-            checked={form.unemployed}
-            onChange={handleChange}
-            className="adv-checkbox"
           />
         </div>
         <div className="form-button-set">
@@ -203,7 +107,7 @@ export default function InitialSurvey({ jobs = [] }) {
             Clear
           </button>
           <button type="submit" className="submit-button">
-            Add Income
+            Update Financial Data
           </button>
         </div>
       </form>
