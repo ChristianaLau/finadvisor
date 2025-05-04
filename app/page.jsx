@@ -57,7 +57,7 @@ const Page = () => {
         </SignedIn>
       </motion.div>
 
-      {/*Updated: Woman image now scroll-animated*/}
+      {/*First page animated*/}
       <motion.div
         className="absolute top-50 right-50 p-4"
         initial={{ opacity: 0, x: 100 }}
@@ -73,7 +73,7 @@ const Page = () => {
         />
       </motion.div>
 
-      {/*Updated: Hero text now scroll-animated*/}
+      {/*Second animated*/}
       <motion.div
         className="relative z-10 top-60 left-30 container mx-auto px-4 py-20 text-left"
         initial={{ opacity: 0, y: 50 }}
