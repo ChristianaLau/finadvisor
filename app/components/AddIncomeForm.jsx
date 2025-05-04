@@ -2,10 +2,8 @@
 import { addIncome } from "@/lib/actions/finData.actions";
 import { periodTypes, periodDefault } from "@/app/constants";
 import { useState, useEffect } from "react";
-import {getLocalDateString} from "@/lib/util/datefunct";
-export default function AddIncomeForm({
-  jobs=[]
-}) {
+import { getLocalDateString } from "@/lib/util/datefunct";
+export default function AddIncomeForm({ jobs = [] }) {
   const updateSpendingData = () => {
     // update statedata
   };
@@ -13,7 +11,6 @@ export default function AddIncomeForm({
     // update db with spending data
   };
 
-  
   const [form, setForm] = useState({
     incomeName: "",
     hours: 0,
@@ -30,38 +27,37 @@ export default function AddIncomeForm({
       let selectedjob = jobs[0];
       setForm((prev) => ({
         ...prev,
-        incomeName: selectedjob?.jobName||"",
+        incomeName: selectedjob?.jobName || "",
         recurring: true,
-        period: selectedjob?.payPeriod||periodDefault,
+        period: selectedjob?.payPeriod || periodDefault,
         amount: 0,
-        basehours: selectedjob?.hoursPerPeriod||0,
+        basehours: selectedjob?.hoursPerPeriod || 0,
         recurringStart: "",
       }));
     }
   });
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    console.log(type,value,typeof(value),Number(value) )
+    console.log(type, value, typeof value, Number(value));
     setForm((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked :type === "number"? Number(value): value,
+      [name]:
+        type === "checkbox"
+          ? checked
+          : type === "number"
+          ? Number(value)
+          : value,
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const payload = {
-      incomeName: form.incomeName,
-      amount: parseFloat(form.amount),
-      recurring: form.recurring,
-      period: parseInt(form.period),
-      recurringStart: form.recurringStart,
-      recurringEnd: form.recurringEnd,
-      updated: new Date().toISOString(),
-    };
+    const payload = form;
+    // payload.amount=parseFloat(form.amount).toFixed(2)
+    // payload.period=parseInt(form.period)
     console.log("Submitted data:", payload);
-    let added = addIncome(payload);
+    let added = await addIncome(payload);
     // Send to API or save to state/storage
   };
   return (
