@@ -2,6 +2,7 @@
 import { addIncome } from "@/lib/actions/finData.actions";
 import { periodTypes, periodDefault } from "@/app/constants";
 import { useState, useEffect } from "react";
+import {getLocalDateString} from "@/lib/util/datefunct";
 export default function AddIncomeForm({
   jobs=[]
 }) {
@@ -11,6 +12,8 @@ export default function AddIncomeForm({
   const saveSpendingData = () => {
     // update db with spending data
   };
+
+  
   const [form, setForm] = useState({
     incomeName: "",
     hours: 0,
@@ -18,7 +21,7 @@ export default function AddIncomeForm({
     received: true,
     recurring: false,
     period: periodDefault,
-    recurringStart: new Date().toISOString().slice(0, 10),
+    recurringStart: getLocalDateString(),
     recurringEnd: "",
   });
   useEffect(() => {
@@ -38,9 +41,10 @@ export default function AddIncomeForm({
   });
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+    console.log(type,value,typeof(value),Number(value) )
     setForm((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: type === "checkbox" ? checked :type === "number"? Number(value): value,
     }));
   };
 
@@ -54,7 +58,6 @@ export default function AddIncomeForm({
       period: parseInt(form.period),
       recurringStart: form.recurringStart,
       recurringEnd: form.recurringEnd,
-      type: form.type,
       updated: new Date().toISOString(),
     };
     console.log("Submitted data:", payload);
@@ -83,7 +86,7 @@ export default function AddIncomeForm({
           <input
             type="number"
             name="amount"
-            value={form.amount}
+            value={Number(form.amount).toString()}
             onChange={handleChange}
             className="adv-input"
           />
@@ -151,31 +154,6 @@ export default function AddIncomeForm({
             </div>
           </>
         )}
-
-        <div className="form-set">
-          <label>Type</label>
-          <input
-            type="text"
-            name="type"
-            value={form.type}
-            onChange={handleChange}
-            className="adv-input"
-          />
-        </div>
-
-        <div className="form-set">
-          <label>Want Level (0-10)</label>
-          <input
-            type="number"
-            name="wantLevel"
-            value={form.wantLevel}
-            onChange={handleChange}
-            className="adv-input"
-            min="1"
-            max="5"
-            step="1"
-          />
-        </div>
 
         <div className="form-button-set">
           <button type="clear" className="submit-button">
