@@ -26,7 +26,7 @@ export const getUserID = async () => {
     //   const cu = await currentUser();
     //   uid = cu?.id;
     // }
-    // // console.log(userId);
+   console.log(userId);
     await connect();
     const user = await User.findOne({ clerkId: uid });
     console.log(user);
